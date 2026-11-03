@@ -56,6 +56,13 @@ export const REQUEST_STATUS_LABELS: Record<RequestStatus, string> = {
   CANCELLED: 'Cancelled',
 };
 
+/** Same statuses worded for staff screens (the customer labels address the customer as "you"). */
+export const REQUEST_STATUS_LABELS_STAFF: Record<RequestStatus, string> = {
+  ...REQUEST_STATUS_LABELS,
+  AWAITING_CUSTOMER: 'Awaiting customer',
+  AWAITING_QUOTATION_APPROVAL: 'Quotation with customer',
+};
+
 export const TERMINAL_STATUSES: RequestStatus[] = ['CLOSED', 'CANCELLED'];
 /** Statuses during which work is happening — used for "active jobs" counts. */
 export const ACTIVE_WORK_STATUSES: RequestStatus[] = [

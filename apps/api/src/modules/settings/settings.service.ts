@@ -2,6 +2,7 @@ import type { SettingsUpdate } from '@dante/shared';
 import { db, type Db } from '../../db/knex.js';
 import { audit } from '../../core/audit.js';
 import { DEFAULT_SETTINGS, PUBLIC_SETTING_KEYS, type PlatformSettings } from './settings.defaults.js';
+import { activeGateway } from '../payments/gateway.js';
 
 let cache: { value: PlatformSettings; at: number } | null = null;
 const TTL_MS = 30_000;
@@ -26,7 +27,8 @@ export async function getSettings(conn: Db = db, fresh = false): Promise<Platfor
 
 export async function getPublicSettings() {
   const s = await getSettings();
-  return Object.fromEntries(PUBLIC_SETTING_KEYS.map((k) => [k, s[k]]));
+  // whether an online payment gateway is live (decided server-side from configuration, never by the client)
+  return { ...Object.fromEntries(PUBLIC_SETTING_KEYS.map((k) => [k, s[k]])), onlinePaymentAvailable: !!activeGateway() };
 }
 
 export async function updateSettings(patch: SettingsUpdate, actorUserId: number) {

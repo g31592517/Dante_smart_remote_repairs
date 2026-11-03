@@ -59,9 +59,9 @@ export function createApp(opts: AppOptions = {}) {
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
 
-  const apiLimiter = rateLimit({ windowMs: 60_000, limit: opts.apiRateLimit ?? (isTest ? 10_000 : 300), standardHeaders: 'draft-8', legacyHeaders: false,
+  const apiLimiter = rateLimit({ windowMs: 60_000, limit: opts.apiRateLimit ?? (isTest ? 10_000 : env.API_RATE_LIMIT), standardHeaders: 'draft-8', legacyHeaders: false,
     handler: (_req, res) => res.status(429).json({ error: { code: 'RATE_LIMITED', message: 'Too many requests. Please slow down.' } }) });
-  const authLimiter = rateLimit({ windowMs: 15 * 60_000, limit: opts.authRateLimit ?? (isTest ? 10_000 : 20), standardHeaders: 'draft-8', legacyHeaders: false,
+  const authLimiter = rateLimit({ windowMs: 15 * 60_000, limit: opts.authRateLimit ?? (isTest ? 10_000 : env.AUTH_RATE_LIMIT), standardHeaders: 'draft-8', legacyHeaders: false,
     handler: (_req, res) => res.status(429).json({ error: { code: 'RATE_LIMITED', message: 'Too many attempts. Please wait a few minutes and try again.' } }) });
 
   // Public catalogue images (never customer uploads — those are private and served via /attachments).

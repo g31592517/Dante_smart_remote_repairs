@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/sora';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sora Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #050f1f;
+  --color-ink-900: #0b1f3a;
+  --color-ink-800: #12305a;
+  --color-ink-700: #1d4275;
+  --color-ink-600: #2f5a92;
+  --color-ink-100: #e6edf7;
+  --color-ink-50: #f6f8fc;
+
+  --color-brand-700: #0b7d71;
+  --color-brand-600: #0e9f8e;
+  --color-brand-500: #14b8a6;
+  --color-brand-400: #2dd4bf;
+  --color-brand-100: #ccfbf1;
+  --color-brand-50: #f0fdfa;
+
+  --color-spark-500: #f5a524;
+  --color-spark-100: #fef3c7;
+
+  --radius-xl: 0.9rem;
+  --radius-2xl: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(11 31 58 / 0.06), 0 8px 24px -12px rgb(11 31 58 / 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink-50 text-ink-900 antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-ink-100 bg-white shadow-card;
+  }
+  .label {
+    @apply mb-1 block text-sm font-medium text-ink-800;
+  }
+  .input {
+    @apply block w-full rounded-xl border border-ink-100 bg-white px-3.5 py-2.5 text-sm text-ink-900 shadow-sm placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/25 focus:outline-none disabled:bg-ink-50 disabled:text-slate-500;
+  }
+  .input-error {
+    @apply border-rose-400 focus:border-rose-500 focus:ring-rose-500/25;
+  }
+  .link {
+    @apply font-medium text-brand-700 underline-offset-4 hover:underline;
+  }
+}

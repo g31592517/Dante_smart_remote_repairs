@@ -15,6 +15,10 @@ const schema = z.object({
   APP_URL: z.url().default('http://localhost:5173'),
   API_URL: z.url().default('http://localhost:4000'),
   CORS_ORIGINS: z.string().default('http://localhost:5173'),
+  /** sign-in / registration / password-reset attempts allowed per IP per 15 minutes */
+  AUTH_RATE_LIMIT: z.coerce.number().int().min(1).default(20),
+  /** API requests allowed per IP per minute */
+  API_RATE_LIMIT: z.coerce.number().int().min(1).default(300),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
 
   DB_HOST: z.string().default('127.0.0.1'),
