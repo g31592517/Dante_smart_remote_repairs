@@ -12,6 +12,7 @@
     "db:rollback": "tsx --env-file-if-exists=.env src/db/cli.ts rollback",
     "db:seed": "tsx --env-file-if-exists=.env src/db/cli.ts seed",
     "db:reset": "tsx --env-file-if-exists=.env src/db/cli.ts reset",
+    "create-admin": "tsx --env-file-if-exists=.env src/db/cli.ts create-admin",
     "openapi": "tsx src/docs/write-openapi.ts",
     "test": "vitest run"
   },

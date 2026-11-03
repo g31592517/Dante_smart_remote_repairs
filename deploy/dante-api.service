@@ -1,0 +1,23 @@
+# systemd unit for the API.  Install: cp deploy/dante-api.service /etc/systemd/system/ && systemctl enable --now dante-api
+[Unit]
+Description=Dante Smart Remote Repairs API
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=dante
+WorkingDirectory=/srv/dante/apps/api
+EnvironmentFile=/srv/dante/apps/api/.env
+ExecStartPre=/usr/bin/node dist/db-cli.js migrate
+ExecStart=/usr/bin/node dist/server.js
+Restart=on-failure
+RestartSec=5
+# hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/srv/dante/apps/api/storage
+
+[Install]
+WantedBy=multi-user.target
