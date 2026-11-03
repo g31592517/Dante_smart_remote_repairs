@@ -1,0 +1,18 @@
+{
+  "name": "dante-smart-remote-repairs",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Integrated IT support, remote assistance, hardware repair and IT e-commerce platform",
+  "workspaces": ["packages/*", "apps/*"],
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "dev:api": "npm run dev -w @dante/api",
+    "dev:web": "npm run dev -w @dante/web",
+    "db:migrate": "npm run db:migrate -w @dante/api",
+    "db:rollback": "npm run db:rollback -w @dante/api",
+    "db:seed": "npm run db:seed -w @dante/api",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build -w @dante/api && npm run build -w @dante/web"
+  }
+}
